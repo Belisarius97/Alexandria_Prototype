@@ -1,0 +1,73 @@
+{
+  "host": "0.0.0.0",
+  "port": 8081,
+  "public": "../public/",
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  "postgres": {
+    "client": "pg",
+    "connection": "postgres://alexandria_proto_client:@localhost:5432/alexandria_proto"
+  },
+  "authentication": {
+    "secret": "c3726e09212978ad71f2039dc20abc72cb7a9347fba95504c046526f48bab494ef2103a8132a7d4d3ab1c047e0bd3145946be51686792a17a94238963f92934b37a164615cb2181f263e801aae0e283cb49965fc01b85989667482fe594b412aa22530924e80de28badb2bad9665e73a5ded7aae503b2c6820ebb0c194e25bf551d9ed6be9e9841b2e8b94ce943d25a4c80366d5afb1cc57be290b0ed23bfb51de2104728410a6c8b39c4c383ecaf303368f23fadcfd4309593b9f2cfc8a7ec69748edd015eb7c5cb63601444d69945ad8a6b4efee2a07488a441cbaf87632359f92cda317900c458cf4c36cc4f0f411d9edd327c5bd37a4d60538506a2bf27c",
+    "strategies": [
+      "jwt",
+      "local"
+    ],
+    "path": "/authentication",
+    "service": "users",
+    "jwt": {
+      "header": {
+        "type": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "subject": "anonymous",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "entity": "user",
+      "service": "users",
+      "usernameField": "email",
+      "passwordField": "password"
+    },
+    "google": {
+      "clientID": "your google client id",
+      "clientSecret": "your google client secret",
+      "successRedirect": "/",
+      "scope": [
+        "profile openid email"
+      ]
+    },
+    "facebook": {
+      "clientID": "your facebook client id",
+      "clientSecret": "your facebook client secret",
+      "successRedirect": "/",
+      "scope": [
+        "public_profile",
+        "email"
+      ],
+      "profileFields": [
+        "id",
+        "displayName",
+        "first_name",
+        "last_name",
+        "email",
+        "gender",
+        "profileUrl",
+        "birthday",
+        "picture",
+        "permissions"
+      ]
+    },
+    "cookie": {
+      "enabled": true,
+      "name": "feathers-jwt",
+      "httpOnly": false,
+      "secure": false
+    }
+  }
+}
